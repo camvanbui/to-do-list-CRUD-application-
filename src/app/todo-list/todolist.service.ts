@@ -11,7 +11,6 @@ import { Observable, catchError, tap, throwError } from "rxjs";
 export class TodoListService {
 
   todoLists: TodoList[] = [];
-  private todoUrl = 'http://localhost:4200/todoLists';
 
   // inject dependency HttpService
   // http is an instance
@@ -21,16 +20,21 @@ export class TodoListService {
   //service class had get method to return all data from TodoLists interface, from an array to an Observa
   getTodos(): Observable<TodoList[]> {
     // get what type of response use generic <>
-    return this.http.get<TodoList[]>(this.todoUrl).pipe(
+    return this.http.get<TodoList[]>('http://localhost:4200/todoLists').pipe(
       tap(data => console.log('All: ', JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
   //save to fake api
-
-  saveProduct(postData: any) {
-    return this.http.post(this.todoUrl, postData)
+  // postData is todoForm value
+  saveProduct(postData: any, selectedTodo: any) {
+    if (!selectedTodo) {
+      return this.http.post('http://localhost:4200/todoLists', postData);
+    } 
+    else {
+      return this.http.put(`http://localhost:4200/todoLists/${selectedTodo.id}`, postData);
+    }
   }
   
   private handleError(err: HttpErrorResponse) {
@@ -49,7 +53,4 @@ export class TodoListService {
   // the method below returns the initial number (11).
   // if the heroes array is not empty, the method below returns the highest
   // hero id + 1.
-  todoId(todoLists: TodoList[]): number {
-    return todoLists.length > 0 ? Math.max(...todoLists.map(todoLists => todoLists.id)) + 1 : 11;
-  }
 }

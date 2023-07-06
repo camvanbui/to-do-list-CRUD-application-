@@ -22,10 +22,11 @@
                 <td>{{todo.title}}</td>
                 <td>{{todo.description}}</td>
                 <td>
+                    <!-- pass in the todo object -->
                     <!-- edit button -->
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="showEditModal(todo)"></button>
                     <!-- delete button -->
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="showDeleteModal(todo)"></button>
                 </td>
             </tr>
         </ng-template>
@@ -38,8 +39,10 @@
     </p-table>
 
     <!-- pass value of the parent to the children -->
-    <app-add-edit-todolist [displayChildAddModal] = "displayAddModal" (clickClose) = "hideAddModal($event)" 
-    (clickAdd)="saveNewTodoList($event)"></app-add-edit-todolist>
+    <app-add-edit-todolist [displayChildAddModal] = "displayAddEditModal" 
+    [selectedChildTodo]="selectedTodo" 
+    (clickClose) = "hideAddModal($event)" 
+    (clickAddEdit)="saveNewTodoList($event)"></app-add-edit-todolist>
 
     <p-toast position="bottom-center"></p-toast>
 </div>

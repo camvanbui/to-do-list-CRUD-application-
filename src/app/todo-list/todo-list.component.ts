@@ -15,10 +15,12 @@ export class TodoListComponent implements OnInit, OnDestroy{
   //create an instance of TodoList interface 
   todoLists: TodoList[] = [];
   totalNumber: number = 0;
-  displayAddModal: boolean = false;
-
+  displayAddEditModal: boolean = false;
   errorMessage: string= '';
   sub!: Subscription;
+
+  selectedTodo: any = null;
+
   // private _todoListService; 
   // // registering to service via constr utor
   // constructor(todoListService: TodoListService) {
@@ -48,16 +50,32 @@ export class TodoListComponent implements OnInit, OnDestroy{
   }
 
   showAddModal() {
-    this.displayAddModal = true;
+    this.displayAddEditModal = true;
+    this.selectedTodo = null;
   }
 
-  // isClosed is true, displayAddModal is false
+  // isClosed is true, displayAddEditModal is false
   hideAddModal(isClosed: boolean) {
-    this.displayAddModal = !isClosed;
+    this.displayAddEditModal = !isClosed;
   }
 
   // unshift to get the last data
   saveNewTodoList(newData: any) {
-    this.todoLists.unshift(newData);
+    // if (newData.id === this.selectedTodo.id) {
+    //   const todoIndex = this.todoLists.findIndex(data => data.id === newData.id);
+    //   this.todoLists[todoIndex] = newData;
+    // }
+    // this.todoLists.unshift(newData);
+  }
+
+  // pass todo data to child component
+  showEditModal(todo: TodoList) {
+    this.displayAddEditModal = true;
+    this.selectedTodo = todo;
+  }
+
+  showDeleteModal(todo: TodoList) {
+    this.displayAddEditModal = true;
+    
   }
 }
