@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="card flex justify-content-center">
+        <p-button label="Add To Do Tasks" (click)="showAddModal()"></p-button>
+    </div>
+    
+    <p-table #dt [value]="todoLists" dataKey="id" [paginator]="true" [rowHover]="true" [rows] = "10" [showCurrentPageReport]="true" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem'}" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10, 20]">
+
+        <ng-template pTemplate="caption"> {{pageTile}}</ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id" width="25%">ID <p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="title" width="25%">Title<p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="description" width="25%">Description<p-sortIcon field="description"></p-sortIcon></th>
+                <th width="25%">Action</th>
+            </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-todo>
+            <tr>
+                <td>{{todo.id}}</td>
+                <td>{{todo.title}}</td>
+                <td>{{todo.description}}</td>
+                <td>
+                    <!-- edit button -->
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                    <!-- delete button -->
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
+                </td>
+            </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{todoLists ? this.totalNumber : 0}} products.
+            </div>
+        </ng-template>
+    </p-table>
+
+    <!-- pass value of the parent to the children -->
+    <app-add-edit-todolist [displayChildAddModal] = "displayAddModal" (clickClose) = "hideAddModal($event)" 
+    (clickAdd)="saveNewTodoList($event)"></app-add-edit-todolist>
+
+    <p-toast position="bottom-center"></p-toast>
+</div>
