@@ -9,7 +9,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AddEditTodolistModule } from './add-edit-todolist/add-edit-todolist.module';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { MessageService } from 'primeng/api';
     ToastModule,
     MessagesModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   exports: [RouterModule]
 })
 export class TodoListModule { }

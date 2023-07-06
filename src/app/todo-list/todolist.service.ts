@@ -37,6 +37,10 @@ export class TodoListService {
     }
   }
   
+  deleteTodo(todoId: number) {
+    return this.http.delete(`http://localhost:4200/todoLists/${todoId}`)
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessage= '';
     if (err.error instanceof ErrorEvent) {

@@ -2,7 +2,7 @@
   "todoLists": [
     {
       "id": 1,
-      "title": "Doing laundry",
+      "title": "Doing haha",
       "description": "Do 2 laundries, hang clothes to the racket and put outside the balcony"
     },
     {
@@ -139,21 +139,6 @@
       "id": "28",
       "title": "aaaa",
       "description": "aaaaaaaaaaaaaaaaa"
-    },
-    {
-      "id": "30",
-      "title": "aaaaaaaa",
-      "description": "aaaaaaaaaaaaaaaaa"
-    },
-    {
-      "id": "29",
-      "title": "aloalo",
-      "description": "heeeeeeeeeeee"
-    },
-    {
-      "id": "31",
-      "title": "dddddddd",
-      "description": "dddddddddddddd"
     }
   ]
 }
